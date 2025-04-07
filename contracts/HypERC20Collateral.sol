@@ -24,7 +24,8 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 /**
- * @title Hyperlane ERC20 Token Collateral that wraps an existing ERC20 with remote transfer functionality.
+ * @title Hyperlane ERC20 Token Collateral that wraps USDX on the destination chain-Arbitrum.
+ Tokens are locked inside contract on BNB Chain.
  * @author Abacus Works
  */
 contract HypERC20Collateral is TokenRouter {
@@ -34,11 +35,11 @@ contract HypERC20Collateral is TokenRouter {
 
     /**
      * @notice Constructor
-     * @param erc20 Address of the token to keep as collateral
+     * @param Address of USDX on BNB Chain to keep as collateral
      */
-    constructor(address erc20, address _mailbox) TokenRouter(_mailbox) {
+    constructor(address usdx, address _mailbox) TokenRouter(_mailbox) {
         require(Address.isContract(erc20), "HypERC20Collateral: invalid token");
-        wrappedToken = IERC20(erc20);
+        wrappedToken = IERC20(usdx);
     }
 
     function initialize(
@@ -63,7 +64,7 @@ contract HypERC20Collateral is TokenRouter {
         uint256 _amount
     ) internal virtual override returns (bytes memory) {
         wrappedToken.safeTransferFrom(msg.sender, address(this), _amount);
-        return bytes(""); // no metadata
+        return bytes("USDX"); // no metadata
     }
 
     /**
