@@ -12,7 +12,7 @@ import "@fhenixprotocol/contracts/FHE.sol";
  * @author Abacus Works
  * @dev Supply on each chain is not constant but the aggregate supply across all chains is.
  */
-contract CappuccinoToken is ERC20Upgradeable, TokenRouter {
+contract Cusdx is ERC20Upgradeable, TokenRouter {
     uint8 private immutable _decimals;
 
     mapping(address =>euint256) internal _encBalances;
