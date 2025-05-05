@@ -12,6 +12,8 @@ import "@fhenixprotocol/contracts/FHE.sol";
  * @author Abacus Works
  * @dev Supply on each chain is not constant but the aggregate supply across all chains is.
  */
+
+//this is a confidential version of USDX wrapped token contract
 contract Cusdx is ERC20Upgradeable, TokenRouter {
     uint8 private immutable _decimals;
 
